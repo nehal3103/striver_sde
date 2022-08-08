@@ -50,13 +50,7 @@ int n = nums.size();
         return dup;
         
 -hashmap 
-
-*/
-
-class Solution {
-public:
-    int findDuplicate(vector<int>& nums) {
-        unordered_map<int, int> freq;
+unordered_map<int, int> freq;
         int dup = 0;
         for(int i = 0; i < nums.size(); i++){
             freq[nums[i]]++;
@@ -64,6 +58,28 @@ public:
         for(int i = 0; i < nums.size(); i++){
             if(freq[i] > 1){
                 dup = i;
+                break;
+            }
+        }
+        return dup;
+-tc -> O(n)
+-sc -> o(n)
+
+
+
+*/
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        int dup = 0;
+        for(int i = 0; i < n; i++){
+            int index = abs(nums[i]);
+            if(nums[index] > 0)
+                nums[index] = -1*nums[index];
+            else{
+                dup = index;
                 break;
             }
         }
