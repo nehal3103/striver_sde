@@ -13,9 +13,26 @@ int length = nums.size();
         }
         return dup;   
 -tc -> o(n^2)
+-sc -> o(1)
 
 -sort the array, find duplicate
 -tc -> o(nlogn) + o(n)
+-sc -> o(1)
+sort(nums.begin(), nums.end());
+        int dup = 0;
+        for(int i = 0; i < nums.size()-1; i++){
+            if(nums[i] == nums[i+1]){
+                dup = nums[i];
+            }
+        }
+        return dup;
+        
+-better approach
+-make a frequency array having n size, initialise with 0
+-traverse the given array and update the frequency array as and when the element comes
+-if the value of any element in the freq array becomes 2, then that is the duplicate element
+-tc -> O(n)
+-sc -> o(n)
 
 */
 
@@ -23,12 +40,19 @@ int length = nums.size();
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        int n = nums.size();
         int dup = 0;
-        for(int i = 0; i < nums.size()-1; i++){
-            if(nums[i] == nums[i+1]){
-                dup = nums[i];
+        int freq[n+1];
+        for(int i = 0; i < n+1; i++){
+            freq[i] = 0;
+        }
+        for(int i = 0; i < n; i++){
+            if(freq[nums[i]] == 0){
+                freq[nums[i]]++;                
             }
+            else{
+                dup = nums[i];               
+            } 
         }
         return dup;
     }
