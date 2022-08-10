@@ -20,6 +20,7 @@ int maxCount = 0;
             }
         }
         return nums[index];
+        
 
 -better approach
 -sorting and returning the element present at the middle
@@ -29,18 +30,12 @@ sort(nums.begin(), nums.end());
         int n = nums.size();
         return nums[n/2];
         
+        
 -linear tc approach
 -using hashmaps
 -tc - o(n)
 -sc - o(n)
-
-*/
-
-
-class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        unordered_map<int, int> freq;
+unordered_map<int, int> freq;
         int n = nums.size();
         for(int i = 0; i < n; i++){
             freq[nums[i]]++;
@@ -52,5 +47,38 @@ public:
             }
         }
         return maj;
+        
+        
+-moore's voting algo
+-linearly iterate from the first to the last elemnt
+-initially, count = 0, element = 0
+-if count  = 0; element = a[i]
+-if element = a[i], count++
+-else, count--
+-return element
+-intuition ->  
+
+
+*/
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        int count  = 0;
+        int element = 0;
+        for(int i = 0; i < n; i++){
+            if(count == 0){
+                element = nums[i];
+            }            
+            if(element == nums[i]){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+        return element;        
     }
 };
