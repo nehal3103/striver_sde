@@ -11,10 +11,6 @@
 -use hashtable to solve, insert all nodes, if already found, cycle exists, return that node
 -tc -> o(1)
 -sc -> o(n)
-*/
-class Solution {
-public:
-    ListNode *detectCycle(ListNode *head) {
         unordered_set<ListNode*> nodes;
         ListNode *temp = head;
         while(temp != NULL){
@@ -24,6 +20,34 @@ public:
             nodes.insert(temp);
             temp = temp->next;
         }
+        return NULL;
+ 
+-slow and fast pointer moethod
+-find the collision pt
+-entry pointer at the head, move both entry plus slow by 1 step
+-the node at which they collide, will be the req node
+
+*/
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head == NULL || head->next == NULL){
+            return NULL;
+        }
+        ListNode *slow = head;
+        ListNode *fast = head;
+        ListNode *temp = head;
+        while(fast->next != NULL && fast->next->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                while(slow != temp){
+                    slow = slow->next;
+                    temp = temp->next;
+                }
+                return slow;
+            }
+        }        
         return NULL;
     }
 };
