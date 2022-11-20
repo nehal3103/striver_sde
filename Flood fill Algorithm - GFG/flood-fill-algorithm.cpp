@@ -3,6 +3,8 @@
 using namespace std;
 
 // } Driver Code Ends
+
+
 class Solution {
 private:
     void dfs(int row, int col, vector<vector<int>>&ans,vector<vector<int>>&image, int newColor, int delRow[], int delCol[], int iniColor){
@@ -28,6 +30,11 @@ public:
         dfs(sr,sc,ans,image,newColor,delRow,delCol,iniColor);
         return ans;
     }
+    
+    /*
+    tc - o(n*m)
+    sc - o(n*m)
+    */
 };
 
 //{ Driver Code Starts.
