@@ -5,12 +5,12 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   private:
-    void dfs(int node, vector<int> adj[], int vis[], vector<int> &ls){
+    void dfs(int node, vector<int> adj[], int vis[], vector<int> &result){
         vis[node] = 1;
-        ls.push_back(node);
+        result.push_back(node);
         for(auto it: adj[node]){
             if(!vis[it]){
-                dfs(it, adj, vis, ls);
+                dfs(it, adj, vis, result);
             }
         }
     }
@@ -20,9 +20,9 @@ class Solution {
         // Code here
         int vis[V] = {0};
         int start = 0;
-        vector<int> ls;
-        dfs(start, adj, vis, ls);
-        return ls;
+        vector<int> result;
+        dfs(start, adj, vis, result);
+        return result;
     }
 };
 
